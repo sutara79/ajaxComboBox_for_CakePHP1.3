@@ -1,0 +1,1 @@
+2012-09-07 02:18:05 Warning: Warning (2): json_encode() [<a href='http://php.net/function.json-encode'>function.json-encode</a>]: type is unsupported, encoded as null in [D:\MyDocument\My Dropbox\server\CakeAcbox1315\app\controllers\nations_controller.php, line 28]
