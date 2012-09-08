@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.6.0
+jquery.ajaxComboBox.6.1
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -1042,8 +1042,9 @@ MIT License
 					});
 
 					//画面を整える
-					$(Elem.combo_input).focus();
 					$(Elem.combo_input).val(result);
+					Vars.prev_value = result;
+					$(Elem.combo_input).focus();
 					btnShortDisable();
 				
 					//テキストエリアを入力可能に
@@ -1060,12 +1061,14 @@ MIT License
 		function findTag(now_value) {
 			//キャレット位置を取得
 			var pos  = getCaretPos($(Elem.combo_input).get(0));
+
 			//for Opera.
 			//selectionStartで改行を2文字分に認識してしまう仕様に対応する。
 			//"pos"をsubstringで正しく扱える値に修正する。
 			if (window.opera) {
-				var alltext = $(Elem.combo_input).text().replace(/\n/g, '\na');
-				var range = alltext.substr(0, pos);
+				var textwhole = $(Elem.combo_input).val();
+				var textdouble = textwhole.replace(/\n/g, '\nq');
+				var range = textdouble.substr(0, pos);
 				var arr_skip = range.match(/\n/g);
 				var len_skip = (arr_skip)
 					? arr_skip.length
@@ -1927,12 +1930,12 @@ MIT License
 
 					var pos = left.length + ctext.length;
 					//for Opera.
-					if (window.opera) {
+//%					if (window.opera) {
 						var skip = left + '' + ctext;
 						skip = skip.match(/\n/g);
 						skip = (skip) ? skip.length : 0;
 						pos += skip;
-					}
+//%					}
 					setCaretPos(pos);
 				}
 				
